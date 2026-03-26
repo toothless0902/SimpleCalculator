@@ -73,7 +73,7 @@
             // lblTitle
             // 
             lblTitle.Font = new Font("맑은 고딕", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblTitle.ForeColor = Color.Blue;
+            lblTitle.ForeColor = Color.Pink;
             lblTitle.Location = new Point(183, -9);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(514, 64);
