@@ -2,7 +2,7 @@ namespace SimpleCalculator
 {
     public partial class Form1 : Form
     {
-        int firstNumber = 0;
+        double firstNumber = 0;
         string currentOperator = "";
         bool isOperatorClicked = false;
         public Form1()
@@ -51,8 +51,8 @@ namespace SimpleCalculator
         private void btnEqual_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtInputWindow.Text) || currentOperator == "") return;
-            int secondNumber = int.Parse(txtInputWindow.Text);
-            int result = 0;
+            double secondNumber = double.Parse(txtInputWindow.Text);
+            double result = 0;
 
             switch (currentOperator)
             {
@@ -62,24 +62,68 @@ namespace SimpleCalculator
                 case "-":
                     result = firstNumber - secondNumber;
                     break;
-                case "x": 
+                case "x":
                     result = firstNumber * secondNumber;
                     break;
                 case "÷":
                     if (secondNumber != 0)
                         result = firstNumber / secondNumber;
                     else
-                        MessageBox.Show("0으로 나눌 수 없습니다."); 
+                        MessageBox.Show("0으로 나눌 수 없습니다.");
                     break;
             }
             txtInputWindow.Text = result.ToString();
             txtOutputWindow.Text = firstNumber + " " + currentOperator + " " + secondNumber + " = " + result.ToString();
             currentOperator = "";
+            isOperatorClicked = true;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (txtInputWindow.Text.Length > 0)
+            {
+
+                txtInputWindow.Text = txtInputWindow.Text.Substring(0, txtInputWindow.Text.Length - 1);
+            }
+        }
+
+        private void btnCE_Click(object sender, EventArgs e)
+        {
+            txtInputWindow.Text = "0";
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtInputWindow.Text = "0";
+            txtOutputWindow.Text = "";
+            firstNumber = 0;
+            currentOperator = "";
+            isOperatorClicked = false;
+        }
+
+        private void btnPlusMinus_Click(object sender, EventArgs e)
+        {
+            if (txtInputWindow.Text != "" && txtInputWindow.Text != "0")
+            {
+                double val = double.Parse(txtInputWindow.Text);
+                val = val * -1;
+                txtInputWindow.Text = val.ToString();
+            }
+        }
+
+        private void btnDot_Click(object sender, EventArgs e)
+        {
+            if (isOperatorClicked)
+            {
+                txtInputWindow.Text = "0";
+                isOperatorClicked = false;
+            }
+            if (!txtInputWindow.Text.Contains("."))
+            {
+                txtInputWindow.Text += ".";
+            }
         }
     }
 }
