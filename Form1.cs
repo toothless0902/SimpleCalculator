@@ -23,8 +23,8 @@ namespace SimpleCalculator
             }
             if (txtInputWindow.Text == "0" || txtInputWindow.Text == "")
             {
-                if (clickedButton.Text == "0") return; 
-                txtInputWindow.Text = ""; 
+                if (clickedButton.Text == "0") return;
+                txtInputWindow.Text = "";
             }
             txtInputWindow.Text += clickedButton.Text;
             if (currentOperator == "")
@@ -44,7 +44,7 @@ namespace SimpleCalculator
             firstNumber = int.Parse(txtInputWindow.Text);
             currentOperator = btn.Text;
             txtOutputWindow.Text = firstNumber + " " + currentOperator;
-            
+
             isOperatorClicked = true;
         }
 
@@ -53,13 +53,33 @@ namespace SimpleCalculator
             if (string.IsNullOrEmpty(txtInputWindow.Text) || currentOperator == "") return;
             int secondNumber = int.Parse(txtInputWindow.Text);
             int result = 0;
-            if (currentOperator == "+")
+
+            switch (currentOperator)
             {
-                result = firstNumber + secondNumber;
+                case "+":
+                    result = firstNumber + secondNumber;
+                    break;
+                case "-":
+                    result = firstNumber - secondNumber;
+                    break;
+                case "x": 
+                    result = firstNumber * secondNumber;
+                    break;
+                case "÷":
+                    if (secondNumber != 0)
+                        result = firstNumber / secondNumber;
+                    else
+                        MessageBox.Show("0으로 나눌 수 없습니다."); 
+                    break;
             }
             txtInputWindow.Text = result.ToString();
             txtOutputWindow.Text = firstNumber + " " + currentOperator + " " + secondNumber + " = " + result.ToString();
             currentOperator = "";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

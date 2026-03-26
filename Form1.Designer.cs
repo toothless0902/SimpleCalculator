@@ -310,6 +310,7 @@
             Controls.Add(txtOutputWindow);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             Click += btnOperator_Click;
             ResumeLayout(false);
             PerformLayout();
